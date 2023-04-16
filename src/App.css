@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background: cadetblue;
+  background: white;
 }
 
 .App {
@@ -27,7 +27,7 @@ body {
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 4px;
-  background: coral;
+  background: black;
   color: #fff;
 }
 
@@ -48,7 +48,7 @@ body {
 }
 
 .result .box-image {
-  background: coral;
+  background: black;
   height: 100%;
   padding: 1rem;
 }
