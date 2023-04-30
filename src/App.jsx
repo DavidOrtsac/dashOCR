@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { createWorker } from 'tesseract.js';
 import './App.css';
- 
+import {Configuration, OpenAIApi } from "openai";
 
 // Configurations and stuff
-
 const API_KEY = "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"
-// q: HOLD ON, THAT IS UNSAFE. How do I safely reference it from a .env file?
-// a: https://create-react-app.dev/docs/adding-custom-environment-variables/
 
-// Let's hope this works.
 
 function App() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -18,28 +14,16 @@ function App() {
   const [apiOutput, setApiOutput] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
 
-/* 
-  const callOpenAIAPI = async () => {
+  const callGenerateEndpoint = async () => {
+    setIsGenerating(true);
     
-    console.log("Calling the OpenAI API");
-
-    const APIBody = {
-      "model": "text-davinci-003",
-      "prompt": "Turn this into a story:" + {textResult},
-      "temperature": 0,
-      "max_tokens": 600,
-      "top_p": 1.0,
-      "frequency_penalty": 0.0,
-      "presence_penalty": 0.0
-    }
-
-    const response = await fetch("https://api.openai.com/v1/completions", {
-      method: "POST",
+    console.log("Creating worksheet...")
+    const response = await fetch('/api/generate', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + API_KEY
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ textResult })
+      body: JSON.stringify({ userInput }),
     });
 
     const data = await response.json();
@@ -49,11 +33,8 @@ function App() {
       setApiOutput(`${data}`);
   }
 
-  console.log(apiOutput); */
+  console.log(apiOutput);
 
-  
-
-  // For Inputs
   const onUserChangedText = (event) => {
     console.log(event.target.value);
     setUserInput({textResult});
@@ -89,27 +70,36 @@ function App() {
 
   return (
     <div className="App">
+      {/* make any svg graphic that is orange and full of curves and circles */}
 
     {/* What the user sees */}
-
-      <h1>DashOCR</h1>
-      <p>Slightly more accurate OCR.</p>
+    {/* add a header */}
+      <header className="App-header">
+        </header>
+      <div className="container">
+      <div className="header">
+        </div>
+        </div>
+      <h1 className="DashOCR">DashOCR</h1>
+      <p>Slightly more accurate OCR for DashoContent.</p>
       <div className="input-wrapper">
 
     {/* Upload Files Here */}
 
-        <label htmlFor="upload">Upload Image</label>
-        <input type="file" id="upload" accept='image/*' onChange={handleChangeImage} />
+        <label htmlFor="upload">
+        <svg className="uploadicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,13a1,1,0,0,0-1,1v.38L16.52,12.9a2.79,2.79,0,0,0-3.93,0l-.7.7L9.41,11.12a2.85,2.85,0,0,0-3.93,0L4,12.6V7A1,1,0,0,1,5,6h7a1,1,0,0,0,0-2H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V14A1,1,0,0,0,19,13ZM5,20a1,1,0,0,1-1-1V15.43l2.9-2.9a.79.79,0,0,1,1.09,0l3.17,3.17,0,0L15.46,20Zm13-1a.89.89,0,0,1-.18.53L13.31,15l.7-.7a.77.77,0,0,1,1.1,0L18,17.21ZM22.71,4.29l-3-3a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21l-3,3a1,1,0,0,0,1.42,1.42L18,4.41V10a1,1,0,0,0,2,0V4.41l1.29,1.3a1,1,0,0,0,1.42,0A1,1,0,0,0,22.71,4.29Z" fill="white"></path></svg>  
+          Upload Image</label>
+        <input type="file" id="upload" className="upload" accept='image/*' onChange={handleChangeImage} />
       </div>
 
       <br />
 
-    {/* Text Extraction Area */}
+    {/* Text AI-Fixer Area */}
     <div className="prompt-container">
-        <textarea type="hidden" className="prompt-box" placeholder="" value={textResult} onChange={onUserChangedText} />
+        <textarea type="hidden" className="prompt-box" placeholder="OCR text will be printed here..." value={textResult} onChange={onUserChangedText} />
         <div className="prompt-buttons">
       <div>
-        <button onClick={callOpenAIAPI}>Extract Text</button>
+        <button className="AIButton"onClick={callGenerateEndpoint}>Fix Text</button> {/* This button calls the API */}
       </div>
       </div>
       </div>
