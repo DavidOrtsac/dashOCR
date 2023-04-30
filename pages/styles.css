@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap');
+
+body {
+  font-family: sans-serif;
+  /* here we shall add a subtle, blended, gradient background from white to gray */
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(219,219,219,1) 100%);
+  font-family: 'Manrope', sans-serif;
+}
+
+.App {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.outputWrapper {
+    /* add a margin */
+    margin-top: 1em;
+    /* add a black curved border */
+
+    border-radius: 12px;
+    /* give the div color */
+    background-color: #f2f2f2;
+    /* give the div an inner margin */
+    padding: 1em;
+}
+
+.oldSentence {
+    font-style: italic;
+    font-weight: bold;
+    color: blue;
+    /* add a margin */
+    margin-bottom: 0.5em;
+  }
+  
+  .newSentence {
+    font-style: italic;
+    font-weight: bold;
+    color: red;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+.AIButton {
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  /* make the border curved */
+  border-radius: 12px;
+  transition: 0.3s;
+}
+.AIButton:hover {
+  background-color: #686868; /* Gray */
+  color: white;
+}
+.prompt-box {
+  border-bottom-width: 1px;
+  border-color: rgb(219, 219, 219);
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-style: solid;
+  border-top-width: 1px;
+  place-content: flex-start;
+  align-items: flex-start;
+  background-color: rgb(219, 219, 219);
+  border-radius: 16px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column nowrap;
+  gap: 10px;
+  height: 150px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+  width: 610px;
+  max-width: 1200px;
+  will-change: transform;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  font-style: normal;
+  letter-spacing: 0px;
+  line-height: 1.6em;
+  text-align: start;
+  color: black;
+  text-decoration: none;
+  text-transform: none;
+  /* make the font professional */
+  font-family: 'Manrope', sans-serif;
+}
+
+.uploadicon {
+  /* make the upload svg icon smaller */
+  width: 1em;
+  height: 1em;
+  /* add margin */
+  margin-right: 0.5em;
+}
+.DashOCR {
+  text-align: center;
+  /* bold */
+  font-weight: bold;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .15em; 
+  overflow: hidden; 
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to { width: 100% }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+.upload {
+
+  /* make the text red */
+  color: red;
+}
+
+.App h1 {
+  font-size: 3rem;
+}
+
+.App p {
+  color: #1a1a11;
+  font-size: 1.5rem;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper label {
+  display: inline-block;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  background: black;
+  color: #fff;
+}
+
+.input-wrapper input[type="file"] {
+  position: absolute;
+  left: 26px;
+  top: 6px;
+  z-index: -1;
+  font-size: 15px;
+  color: #1a1a11;
+}
+
+.result {
+  margin-top: 4rem;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  /* make borders curved */
+  border-radius: 12px;
+}
+
+.result .box-image {
+
+  height: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.result .box-p {
+  background: #ddd;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.result img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.result p {
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+@media (min-width: 1000px) {
+  .result {
+    grid-template-columns: 1fr 1fr;
+  }
+}
