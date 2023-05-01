@@ -13,8 +13,9 @@ PROGRAMMING INSTRUCTIONS:
 2. Make sure to also double-check grammatical errors.
 3. Make sure to double-check spelling errors.
 4. Make sure the [Corrected Passage] is in the same language it was originally written in.
-5. DO NOT CORRECT THE PASSAGE IF THERE IS NOTHING WRONG WITH IT.
-6. DO NOT MAKE UNNECESSARY CHANGES TO THE PASSAGE IF IT IS ALREADY CORRECT. \n`;
+5. DO NOT CORRECT THE PASSAGE IF THERE IS NOTHING WRONG WITH IT. Also, do not remove arrows or special symbols if they are necessary.
+6. DO NOT CHANGE CAPITALIZATION UNLESS NECESSARY. For example, if all the text are in caps, don't change it.
+7. DO NOT MAKE UNNECESSARY CHANGES TO THE PASSAGE IF IT IS ALREADY CORRECT. \n`;
 const generateAction = async (req, res) => {
   // Run first prompt
   console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
@@ -33,26 +34,25 @@ const generateAction = async (req, res) => {
 
 const secondPrompt = 
   `
-  Old Sentence: ${req.body.userInput}
+  Old Passage: "${req.body.userInput}"
   
-  New Sentence: ${basePromptOutput.text}
-  Spot the difference between the Old Sentence and the New Sentence. Place these two sentences in an HTML format. Compare them by putting both in separate divs. 
+  New Passage: "${basePromptOutput.text}"
+  Spot the difference between the Old Passage and the New Passage. Place thes new passage in an HTML format BUT DO NOT CHANGE ANY OF THE WORDS INSIDE THESE PASSAGES AT ALL.
   
-  Then, highlight the individual changes in the words or punctuation between these two sentences. IF THERE IS NO CHANGE, write "No Changes Needed."
+  Then, highlight EACH individual change in the words or punctuation between these two passages. Also highlight changes in punctuation, grammar, AND spelling. IF THERE IS NO CHANGE, write "No Changes Needed."
   
   FOLLOW THIS TEMPLATE:
   
-  <div class="oldSentence"> PLACE THE OLD SENTENCE HERE </div>
-  <div class="newSentence"> PLACE THE NEW SENTENCE HERE, AND HIGHLIGHT THE CHANGES USING TAGS BETWEEN EACH INDIVIDUAL WORD CHANGE. </div>
+  <div class="newPassage"> PLACE THE NEW PASSAGE HERE. INCLUDE ALL OF IT, AND HIGHLIGHT THE CHANGES USING TAGS BETWEEN EACH INDIVIDUAL WORD/SYMBOL CHANGE. Do it for ALL THE WORDS THAT HAVE BEEN CHANGED. </div>
   
-  <div> Here, if you detected any differences between the Old Sentence and the New Sentence, write "No Changes Needed." IF THERE WERE CHANGES, WRITE "Highlighted content is AI's suggested fix." </div>
+  <div> Here, if you detected any differences between the Old Passage and the New Passage, write "No Changes Needed." IF THERE WERE CHANGES, WRITE "Highlighted content is AI's suggested fix." </div>
   
   HTML output:
   `
   const secondPromptCompletion = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: `${secondPrompt}`,
-    temperature: 0.02,
+    temperature: 0,
     max_tokens: 912,
   });
   

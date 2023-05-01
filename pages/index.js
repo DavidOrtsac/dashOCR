@@ -118,6 +118,7 @@ const Home = () => {
     </div>
     <div className="output-content">
       <div className="outputWrapper">
+      {textResult}
         <div dangerouslySetInnerHTML={{__html: apiOutput}}></div>
       </div>
     </div>
